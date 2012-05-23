@@ -20,6 +20,7 @@
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
+ *  David PHAM-VAN <d.pham-van@ulteo.com> Ulteo SAS - http://www.ulteo.com
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -771,11 +772,16 @@ int guac_protocol_send_clip(guac_socket* socket, const guac_layer* layer) {
 }
 
 
-int guac_protocol_send_clipboard(guac_socket* socket, const char* data) {
+int guac_protocol_send_clipboard(guac_socket* socket, const char* data, ssize_t size) {
+  
+    int base64_length = (size + 2) / 3 * 4;
 
     return
            guac_socket_write_string(socket, "9.clipboard,")
-        || __guac_socket_write_length_string(socket, data)
+        || guac_socket_write_int(socket, base64_length)
+        || guac_socket_write_string(socket, ".")
+        || guac_socket_write_base64(socket, data, size)
+        || guac_socket_flush_base64(socket)
         || guac_socket_write_string(socket, ";");
 
 }

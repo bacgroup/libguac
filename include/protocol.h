@@ -20,6 +20,7 @@
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
+ *  David PHAM-VAN <d.pham-van@ulteo.com> Ulteo SAS - http://www.ulteo.com
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -807,16 +808,17 @@ int guac_protocol_send_size(guac_socket* socket, const guac_layer* layer,
 /* TEXT INSTRUCTIONS */
 
 /**
- * Sends a clipboard instruction over the given guac_socket connection.
+ * Sends a clipboard instruction base64 encoded over the given guac_socket connection.
  *
  * If an error occurs sending the instruction, a non-zero value is
  * returned, and guac_error is set appropriately.
  *
  * @param socket The guac_socket connection to use.
  * @param data The clipboard data to send.
+ * @param size The clipboard data size to send.
  * @return Zero on success, non-zero on error.
  */
-int guac_protocol_send_clipboard(guac_socket* socket, const char* data);
+int guac_protocol_send_clipboard(guac_socket* socket, const char* data, ssize_t size);
 
 /**
  * Sends a name instruction over the given guac_socket connection.
