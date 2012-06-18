@@ -829,5 +829,18 @@ int guac_protocol_send_clipboard(guac_socket* socket, const char* data, ssize_t 
  */
 int guac_protocol_send_name(guac_socket* socket, const char* name);
 
+
+/**
+ * Sends the name of a printjob pdf
+ *
+ * The client is then capable of building the URL of the pdf given that name and
+ * the base URL it already knows and to fetch the PDF file.
+ *
+ * @param socket The guac_socket connection to use.
+ * @param name The file name of the PDF file.
+ * @return Zero on success, non-zero on error.
+ */
+int guac_protocol_send_pdf_printjob_name(guac_socket* socket, const char* name);
+
 #endif
 

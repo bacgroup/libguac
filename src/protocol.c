@@ -1228,3 +1228,11 @@ int guac_protocol_send_transform(guac_socket* socket, const guac_layer* layer,
 }
 
 
+int guac_protocol_send_pdf_printjob_name(guac_socket* socket, const char* name) {
+  	
+    return
+           guac_socket_write_string(socket, "9.printjob,")
+        || __guac_socket_write_length_string(socket, name)
+        || guac_socket_write_string(socket, ";");
+
+}
