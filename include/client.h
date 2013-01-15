@@ -70,6 +70,11 @@ typedef int guac_client_mouse_handler(guac_client* client, int x, int y, int but
 typedef int guac_client_key_handler(guac_client* client, int keysym, int pressed);
 
 /**
+ * Handler for Guacamole seamrdp events.
+ */
+typedef int guac_client_seamrdp_handler(guac_client* client, char* data);
+
+/**
  * Handler for Guacamole clipboard events.
  */
 typedef int guac_client_clipboard_handler(guac_client* client, char* copied);
@@ -282,6 +287,24 @@ struct guac_client {
      * @endcode
      */
     guac_client_key_handler* key_handler;
+
+    /**
+     * Handler for seamrdp events sent by the Guacamole web-client. This
+     * handler will be called whenever the web-client sets window
+     * properties.
+     *
+     * This handler takes a single string which contains the seamrdp command.
+     *
+     * Example:
+     * @code
+     *     int seamrdp_handler(guac_client* client, char* data);
+     *
+     *     int guac_client_init(guac_client* client, int argc, char** argv) {
+     *         client->seamrdp_handler = seamrdp_handler;
+     *     }
+     * @endcode
+     */
+    guac_client_seamrdp_handler* seamrdp_handler;
 
     /**
      * Handler for clipboard events sent by the Guacamole web-client. This
