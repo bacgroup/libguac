@@ -21,6 +21,7 @@
  *
  * Contributor(s):
  *  David PHAM-VAN <d.pham-van@ulteo.com> Ulteo SAS - http://www.ulteo.com
+ *  Alexandre CONFIANT-LATOUR <a.confiant@ulteo.com> Ulteo SAS - http://www.ulteo.com
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -1232,6 +1233,16 @@ int guac_protocol_send_pdf_printjob_notif(guac_socket* socket, const char* name)
     return
            guac_socket_write_string(socket, "8.printjob,")
         || __guac_socket_write_length_string(socket, name)
+        || guac_socket_write_string(socket, ";");
+
+}
+
+int guac_protocol_send_keyboard_ime_state(guac_socket* socket, int imeState, int imeConvMode) {
+    return
+           guac_socket_write_string(socket, "8.imestate,")
+        || __guac_socket_write_length_int(socket, imeState)
+        || guac_socket_write_string(socket, ",")
+        || __guac_socket_write_length_int(socket, imeConvMode)
         || guac_socket_write_string(socket, ";");
 
 }

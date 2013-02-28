@@ -21,6 +21,7 @@
  *
  * Contributor(s):
  *  David PHAM-VAN <d.pham-van@ulteo.com> Ulteo SAS - http://www.ulteo.com
+ *  Alexandre CONFIANT-LATOUR <a.confiant@ulteo.com> Ulteo SAS - http://www.ulteo.com
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -840,5 +841,15 @@ int guac_protocol_send_name(guac_socket* socket, const char* name);
  * @return Zero on success, non-zero on error.
  */
 int guac_protocol_send_pdf_printjob_notif(guac_socket* socket, const char* name);
+
+/**
+ * Sends the keyboard IME state
+ *
+ * @param socket The guac_socket connection to use.
+ * @param imeState Open or close (see RDPBCGR 2.2.8.2.2)
+ * @param imeConvMode Conversion mode (see RDPBCGR 2.2.8.2.2)
+ * @return Zero on success, non-zero on error.
+ */
+int guac_protocol_send_keyboard_ime_state(guac_socket* socket, int imeState, int imeConvMode);
 
 #endif
