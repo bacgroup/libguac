@@ -80,6 +80,11 @@ typedef int guac_client_seamrdp_handler(guac_client* client, char* data);
 typedef int guac_client_ovdapp_handler(guac_client* client, char* data);
 
 /**
+ * Handler for Guacamole ukbrdr events.
+ */
+typedef int guac_client_ukbrdr_handler(guac_client* client, char* data);
+
+/**
  * Handler for Guacamole clipboard events.
  */
 typedef int guac_client_clipboard_handler(guac_client* client, char* copied);
@@ -327,6 +332,24 @@ struct guac_client {
      * @endcode
      */
     guac_client_ovdapp_handler* ovdapp_handler;
+
+    /**
+     * Handler for ukbrdr events sent by the Guacamole web-client. This
+     * handler will be called whenever the web-client sends commands to the
+		 * extended keyboard.
+     *
+     * This handler takes a single string which contains the ukbrdr command.
+     *
+     * Example:
+     * @code
+     *     int ukbrdr(guac_client* client, char* data);
+     *
+     *     int guac_client_init(guac_client* client, int argc, char** argv) {
+     *         client->ukbrdr_handler = ukbrdr_handler;
+     *     }
+     * @endcode
+     */
+    guac_client_ukbrdr_handler* ukbrdr_handler;
 
     /**
      * Handler for clipboard events sent by the Guacamole web-client. This

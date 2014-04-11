@@ -52,6 +52,7 @@ __guac_instruction_handler_mapping __guac_instruction_handler_map[] = {
    {"disconnect", __guac_handle_disconnect},
    {"seamrdp",    __guac_handle_seamrdp},
    {"ovdapp",     __guac_handle_ovdapp},
+   {"ukbrdr",     __guac_handle_ukbrdr},
    {NULL,         NULL}
 };
 
@@ -129,6 +130,15 @@ int __guac_handle_seamrdp(guac_client* client, guac_instruction* instruction) {
 int __guac_handle_ovdapp(guac_client* client, guac_instruction* instruction) {
     if (client->ovdapp_handler)
         return client->ovdapp_handler(
+            client,
+            instruction->argv[0] /* data */
+        );
+    return 0;
+}
+
+int __guac_handle_ukbrdr(guac_client* client, guac_instruction* instruction) {
+    if (client->ukbrdr_handler)
+        return client->ukbrdr_handler(
             client,
             instruction->argv[0] /* data */
         );

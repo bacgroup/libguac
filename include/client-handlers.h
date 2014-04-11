@@ -117,6 +117,11 @@ int __guac_handle_seamrdp(guac_client* client, guac_instruction* instruction);
 int __guac_handle_ovdapp(guac_client* client, guac_instruction* instruction);
 
 /**
+ * Internal initial handler for the ukbrdr instructions.
+ */
+int __guac_handle_ukbrdr(guac_client* client, guac_instruction* instruction);
+
+/**
  * Instruction handler mapping table. This is a NULL-terminated array of
  * __guac_instruction_handler_mapping structures, each mapping an opcode
  * to a __guac_instruction_handler. The end of the array must be marked
